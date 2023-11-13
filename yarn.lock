@@ -3230,7 +3230,7 @@ i18next-http-backend@^2.4.1:
   dependencies:
     cross-fetch "4.0.0"
 
-"i18next@>= 23.2.3":
+i18next@^23.7.6, "i18next@>= 23.2.3":
   version "23.7.6"
   resolved "https://registry.npmjs.org/i18next/-/i18next-23.7.6.tgz"
   integrity sha512-O66BhXBw0fH4bEJMA0/klQKPEbcwAp5wjXEL803pdAynNbg2f4qhLIYlNHJyE7icrL6XmSZKPYaaXwy11kJ6YQ==
