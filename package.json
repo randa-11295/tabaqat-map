@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.8.7",
     "@mapcomponents/react-maplibre": "^0.1.80",
+    "@mui/lab": "^5.0.0-alpha.152",
     "@mui/material": "^5.14.17",
     "graphql": "^16.8.1",
     "i18next": "^23.7.6",

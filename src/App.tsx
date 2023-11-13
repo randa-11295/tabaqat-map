@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
 import rtlPlugin from "stylis-plugin-rtl";
 import createCache from "@emotion/cache";
 import theme from "./utils/theme";
-// import Home from "./Pages/Home";
+import Home from "./Pages/Home";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { RecoilRoot } from "recoil";
 import "./utils/i18n";
-import { MapLibreMap } from "@mapcomponents/react-maplibre";
+
 
 const client = new ApolloClient({
   uri: "https://catalog.tabaqat.net/graphql",
@@ -50,20 +50,7 @@ export default function App() {
       <RecoilRoot>
         <CacheProvider value={isRtl ? cacheRtl : cacheLtr}>
           <ThemeProvider theme={isRtl ? rtlTheme : ltrTheme}>
-            <MapLibreMap
-              options={{
-                style:
-                  "https://wms.wheregroup.com/tileserver/style/osm-bright.json",
-                zoom: 4,
-              }}
-              style={{
-                position: "absolute",
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-              }}
-            />
+           <Home />
           </ThemeProvider>
         </CacheProvider>
       </RecoilRoot>

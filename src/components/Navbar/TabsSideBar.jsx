@@ -7,6 +7,7 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import GpsFixedOutlinedIcon from "@mui/icons-material/GpsFixedOutlined";
 import MapServicesPanel from "../Areas/MapServicesPanel/MapServicesPanel";
+
 export default function TabsSideBar() {
   const [value, setValue] = useState(0);
 
@@ -56,7 +57,7 @@ function TabPanel(props) {
   );
 }
 
-TabPanel.propTypes = {
+TabPanel?.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,
