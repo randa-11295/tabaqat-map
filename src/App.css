@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css?family=Cairo:300,300i,400,400i,500,500i,700,700i,900,900i");
+
+:root {
+  --darkGreen: #004d5c;
+  --lightGray: #e0dfdf;
+}
+
+body {
+  margin: 0;
+ 
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  padding: 0%;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Cairo", sans-serif !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+  transition: .3s;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #bbbbbb;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #8a8a8a;
+}
+
+
+
+.custom-zoom-control {
+  position: absolute;
+  bottom: 80px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+/* .leaflet-control-zoom-in,
+.leaflet-control-zoom-out, */
+.recenter-button {
+
+
+height: 35px;
+width: 35px;
+  border: 2px solid #acacac;
+  background-color: #fff; 
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
