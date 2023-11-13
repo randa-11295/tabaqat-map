@@ -35,6 +35,7 @@ export default function App() {
   const [isRtl, setIsRtl] = useState(false);
 
   useEffect(() => {
+    console.log("add files")
     if (i18n.language === "ar") {
       setIsRtl(true);
     } else {
