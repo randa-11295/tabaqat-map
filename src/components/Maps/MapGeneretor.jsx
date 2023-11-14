@@ -6,13 +6,15 @@ import { useExportMap } from "@mapcomponents/react-maplibre";
 import { useEffect } from "react";
 import map from "maplibre-gl";
 
-map?.setRTLTextPlugin(
-  "https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js",
-  null,
-  true // Lazy load the plugin
-);
 
 const MapGenerator = () => {
+
+  map?.setRTLTextPlugin(
+    "https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js",
+    null,
+    true // Lazy load the plugin
+  );
+  
   const { centerArr, zoomLevel, baseMapUrl } = useConfig();
   const [baseMapGlobeId] = useRecoilState(baseMapIdState);
   return (
