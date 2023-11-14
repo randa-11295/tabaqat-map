@@ -3,18 +3,13 @@ import { useRecoilState } from "recoil";
 import { baseMapIdState } from "../../utils/recoilState";
 import useConfig from "../../utils/config";
 import { useExportMap } from "@mapcomponents/react-maplibre";
-import { useEffect } from "react";
-import map from "maplibre-gl";
+import mainMap from "maplibre-gl";
 
+mainMap.setRTLTextPlugin(
+  "https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js",
+);
 
 const MapGenerator = () => {
-
-  map?.setRTLTextPlugin(
-    "https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js",
-    null,
-    true // Lazy load the plugin
-  );
-  
   const { centerArr, zoomLevel, baseMapUrl } = useConfig();
   const [baseMapGlobeId] = useRecoilState(baseMapIdState);
   return (
