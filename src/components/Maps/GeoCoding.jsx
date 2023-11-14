@@ -12,13 +12,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "react-i18next";
+import useConfig from "../../utils/config";
 
 export default function GeoCoding(props) {
   const [selected, setSelected] = useState({});
   const [listShowed, setListShowed] = useState(false);
   const [autocompleteOption, setAutocompleteOption] = useState([]);
   const [val, setVal] = useState("");
-  const {t} = useTranslation()
+  const { accessToken } = useConfig();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if ((selected.label && val === selected.label) || !val) return;
@@ -26,7 +28,7 @@ export default function GeoCoding(props) {
       .get(`https://geocoder.tabaqat.net/v1/autocomplete`, {
         params: {
           text: val,
-          access_token: "tabaqat-a2nTyh6mgoKC2yju76Pg4C",
+          access_token: accessToken,
           lang: "en",
           size: "6",
         },
@@ -88,7 +90,7 @@ export default function GeoCoding(props) {
             ))
           ) : (
             <ListItem>
-              <ListItemText primary={val + t("geoCoding.notAvailable") } />
+              <ListItemText primary={val + t("geoCoding.notAvailable")} />
             </ListItem>
           )}
         </List>

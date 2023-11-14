@@ -24,7 +24,8 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^13.4.1",
     "recoil": "^0.7.7",
-    "stylis-plugin-rtl": "^2.1.1"
+    "stylis-plugin-rtl": "^2.1.1",
+    "yarn": "^1.22.21"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

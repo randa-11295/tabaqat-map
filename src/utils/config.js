@@ -11,7 +11,7 @@ const useConfig = () => {
       if (!baseMabId) return null;
       return `https://basemaps.tabaqat.net/styles/${baseMabId}/style.json?access_token=${access_token}`;
     },
-
+    accessToken : access_token,
     wmsUrl: (workspaceName, wmsName) => {
       if (!workspaceName || !wmsName) return null;
       return  `https://data.tabaqat.net/geoserver/${workspaceName}/${wmsName}/wms?access_token=${access_token}`  

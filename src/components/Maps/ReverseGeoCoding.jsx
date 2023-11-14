@@ -6,10 +6,13 @@ import SendIcon from "@mui/icons-material/Send";
 import TooltipCustomIconBtn from "../Inputs/TooltipCustomIconBtn";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import useConfig from "../../utils/config";
 
 const ReverseGeoCoding = (props) => {
   const [notFound, setNotFound] = useState(false);
+  const { accessToken } = useConfig();
   const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues: {
       lat: 0,
@@ -22,7 +25,7 @@ const ReverseGeoCoding = (props) => {
           params: {
             "point.lat": values.lat,
             "point.lon": values.long,
-            access_token: "tabaqat-a2nTyh6mgoKC2yju76Pg4C",
+            access_token: accessToken,
             lang: "en",
           },
         })
