@@ -1,14 +1,14 @@
 import { MapLibreMap } from "@mapcomponents/react-maplibre";
 import { useRecoilState } from "recoil";
 import { baseMapIdState } from "../../utils/recoilState";
-import maplibregl from "@mapcomponents/react-maplibre/node_modules/maplibre-gl";
 import useConfig from "../../utils/config";
+// import maplibregl from "@mapcomponents/react-maplibre/node_modules/maplibre-gl";
 
-maplibregl.setRTLTextPlugin(
-  "https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js",
-  null,
-  true 
-);
+// maplibregl.setRTLTextPlugin(
+//   "https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js",
+//   null,
+//   true 
+// );
 
 const MapGenerator = () => {
   const { centerArr, zoomLevel, baseMapUrl } = useConfig();
@@ -21,6 +21,7 @@ const MapGenerator = () => {
         zoom: zoomLevel,
       }}
       style={boxStyle}
+      
     />
   );
 };

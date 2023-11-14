@@ -22,7 +22,7 @@ const useConfig = () => {
       return `https://catalog.tabaqat.net/assets/${id}`;
     },
     getLayersImageURL : (layerName , categoryName)=>{
-      return `https://data.tabaqat.net/geoserver/${categoryName}/wms?layers=${categoryName}%3A${layerName}&access_token=mapsaudi-a2nTyh6mgoKC2yju76Pg4G&service=WMS&version=1.1.0&request=GetMap&bbox=34.57222222222222%2C16.369444444444444%2C55.638888888888886%2C32.56388888888889&width=768&height=590&srs=EPSG%3A4326&styles=&format=image%2Fpng`
+      return `https://data.tabaqat.net/geoserver/${categoryName}/wms?layers=${categoryName}%3A${layerName}&access_token=${access_token}&service=WMS&version=1.1.0&request=GetMap&bbox=34.57222222222222%2C16.369444444444444%2C55.638888888888886%2C32.56388888888889&width=768&height=590&srs=EPSG%3A4326&styles=&format=image%2Fpng`
     }, 
     drawerWidth: {
       xs: "290px",

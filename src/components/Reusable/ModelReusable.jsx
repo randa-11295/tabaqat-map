@@ -54,7 +54,7 @@ BootstrapDialogTitle.propTypes = {
 export default function ModelReusable(props) {
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = (event) => {
+  const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {

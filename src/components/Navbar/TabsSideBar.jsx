@@ -30,7 +30,6 @@ export default function LabTabs() {
   };
 
   return (
-    <Box sx={{ width: "100%", typography: "body1" }}>
       <TabContext value={value}>
         <Box sx={headerTapsStyle}>
           <TabList
@@ -59,6 +58,6 @@ export default function LabTabs() {
           <BaseMapsList />
         </TabPanel>
       </TabContext>
-    </Box>
+  
   );
 }

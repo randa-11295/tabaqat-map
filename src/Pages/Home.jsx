@@ -1,9 +1,9 @@
 import { useState } from "react";
-// import MainMap from "../components/Maps/MainMap";
+import MainMap from "../components/Maps/MainMap";
 import Navbar from "../components/Navbar/Navbar";
 import { Box } from "@mui/material";
 import useConfig from "../utils/config";
-import { MapLibreMap } from "@mapcomponents/react-maplibre";
+
 
 const Home = () => {
   const [isSideNaVOpen, setIsSideNavOpen] = useState(true);
@@ -33,21 +33,8 @@ const Home = () => {
     <Box sx={{ height: "100vh" }}>
       <Navbar closeNaVSideBarHandle={closeNaVSideBarHandle} />
       <Box sx={BoxMapStyle}>
-        {/* <MainMap /> */}
-        <MapLibreMap
-              options={{
-                style:
-                  "https://wms.wheregroup.com/tileserver/style/osm-bright.json",
-                zoom: 4,
-              }}
-              style={{
-                position: "absolute",
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-              }}
-            />
+        <MainMap />
+      
       </Box>
     </Box>
   );

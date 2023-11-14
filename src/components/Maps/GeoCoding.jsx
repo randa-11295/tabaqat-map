@@ -46,7 +46,7 @@ export default function GeoCoding(props) {
     setVal(event.target.value);
   };
 
-  const handleListItemClick = (el) => {;
+  const handleListItemClick = (el) => {
     setSelected(el?.properties);
     setVal(el?.properties.label);
     setListShowed(false);

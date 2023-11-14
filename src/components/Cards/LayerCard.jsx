@@ -7,10 +7,7 @@ export default function LayerCard(props) {
   return (
     <Card sx={cardStyle(props.isSelected)} onClick={props?.selectLayerHandle}>
       <CardMedia
-        onClick={() => {
-          console.log(getLayersImageURL());
-          console.log(props.data);
-        }}
+       
         component="img"
         sx={{
           width: "60px",
@@ -18,12 +15,12 @@ export default function LayerCard(props) {
           borderRadius: 2,
           objectFit: "contain",
         }}
-        alt={props.data.translations[0]?.title}
+     
         image={getLayersImageURL(
           props?.data?.name,
           props?.data?.workspace.name
         )}
-        // "https://eu2.contabostorage.com/8496006d59724e76a11e0661b45ef60e:platform-content/assets%2FdefaultMapImg.png"
+
       />
 
       <Typography sx={{ p: 0, pl: 1, fontSize: ".85rem", pb: 0 }}>
