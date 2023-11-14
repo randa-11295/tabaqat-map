@@ -1,0 +1,25 @@
+{
+    "lang": "English",
+    "name": "اختبار",
+    "basemap": "خرائط الاساس",
+    "categories": "الفئات",
+    "geoData": {
+        "coordinates": "الإحداثيات",
+        "lat": "خط العرض",
+        "long": "خط الطول",
+        "bBox": "مربع الحدود",
+        "points": "النقاط",
+        "pointY": "نقطة Y",
+        "pointX": "نقطة X",
+        "northEast": "الشمال الشرقي",
+        "northWest": "الشمال الغربي",
+        "southWest": "الجنوب الغربي",
+        "southEast": "الجنوب الشرقي"
+    },
+    "geoCoding": {
+        "noResult": " لا توجد بيانات متوفره",
+        "hasError" : "لقد حدث شئ ما" ,
+        "notAvailable":  " غير متوفره" ,
+        "search": "بحث"
+    }
+}

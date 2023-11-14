@@ -1,0 +1,25 @@
+{
+    "lang": "العربيه",
+    "name": "test",
+    "basemap": "Base Map",
+    "categories": "Categories ",
+    "geoData": {
+        "coordinates": "Coordinates",
+        "lat": "Latitude",
+        "long": "Longitude",
+        "bBox": "bBox",
+        "points": "Points",
+        "pointY": "point Y",
+        "pointX": "point X",
+        "northEast": "north East",
+        "northWest": "north West",
+        "southWest": "south West",
+        "southEast": "south East"
+    },
+    "geoCoding": {
+        "noResult": "No Result Available",
+        "hasError" : "Some thing happen" ,
+        "notAvailable": " is not Available ",
+        "search" : "Search"
+    }
+}
