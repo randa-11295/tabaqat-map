@@ -1,6 +1,6 @@
 import Drawer from "@mui/material/Drawer";
 import useConfig from "../../utils/config";
-// import TabsSideBar from "./TabsSideBar";
+import TabsSideBar from "./TabsSideBar";
 
 
 const SideBar = (props) => {
@@ -34,7 +34,7 @@ const SideBar = (props) => {
       }}
       sx={drawerStyle}
     >
-      {/* <TabsSideBar /> */}
+      <TabsSideBar />
     </Drawer>
   );
 };
