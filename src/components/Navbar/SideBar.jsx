@@ -15,6 +15,7 @@ const SideBar = (props) => {
       bgcolor: "secondary.main",
       color: "white",
       flexShrink: 0,
+      overflowX: "hidden"
     },
   };
 

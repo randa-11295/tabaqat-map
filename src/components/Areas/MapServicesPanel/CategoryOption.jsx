@@ -38,7 +38,7 @@ const CategoryOption = (props) => {
       </Typography>
 
       {categoriesLader ? (
-        <Grid container spacing={2.5}>
+        <Grid container spacing={2}>
           {[1, 2, 3, 4, 5, 6, 7, 8].map((el, indx) => (
             <Grid item xs={6} key={el * indx}>
               <LoaderCard />
@@ -46,7 +46,7 @@ const CategoryOption = (props) => {
           ))}
         </Grid>
       ) : (
-        <Grid container spacing={2.5}>
+        <Grid container spacing={2}>
           {categoriesError ? (
             <Grid item xs={12}>
               <NoResult error />
