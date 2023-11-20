@@ -7,12 +7,14 @@ import TooltipCustomIconBtn from "../Inputs/TooltipCustomIconBtn";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import useConfig from "../../utils/config";
+import { sideBarController } from "../../utils/recoilState";
+import { useRecoilState } from "recoil";
 
 const ReverseGeoCoding = (props) => {
   const [notFound, setNotFound] = useState(false);
   const { accessToken } = useConfig();
-  const { t ,  i18n} = useTranslation();
-
+  const { t, i18n } = useTranslation();
+  const [, setSideBarControllerData] = useRecoilState(sideBarController);
   const formik = useFormik({
     initialValues: {
       lat: 0,
@@ -26,11 +28,12 @@ const ReverseGeoCoding = (props) => {
             "point.lat": values.lat,
             "point.lon": values.long,
             access_token: accessToken,
-            lang:  i18n.language,
+            lang: i18n.language,
           },
         })
         .then((res) => {
-          console.log(res.data?.features[0].properties)
+          console.log(res.data?.features[0]?.properties);
+          setSideBarControllerData({ children: <p>test</p>, open: true });
           res.data.features[0]?.geometry
             ? (() => {
                 props.handleMarkerPointsChange({

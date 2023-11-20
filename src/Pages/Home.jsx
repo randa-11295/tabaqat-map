@@ -3,18 +3,22 @@ import MainMap from "../components/Maps/MainMap";
 import Navbar from "../components/Navbar/Navbar";
 import { Box } from "@mui/material";
 import useConfig from "../utils/config";
-
+import { sideBarController } from "../utils/recoilState";
+import { useRecoilState } from "recoil";
 
 const Home = () => {
-  const [isSideNaVOpen, setIsSideNavOpen] = useState(true);
+  const [, setIsSideNavOpen] = useState(true);
   const { drawerWidth } = useConfig();
+  const [sideBarControllerData, setSideBarControllerData] =
+    useRecoilState(sideBarController);
 
   const closeNaVSideBarHandle = (val) => {
     setIsSideNavOpen(val);
+    setSideBarControllerData({ open: false, children: null });
   };
 
   const BoxMapStyle = {
-    width: !isSideNaVOpen
+    width: !sideBarControllerData.open
       ? "100%"
       : {
           xs: "100%",
@@ -34,10 +38,9 @@ const Home = () => {
       <Navbar closeNaVSideBarHandle={closeNaVSideBarHandle} />
       <Box sx={BoxMapStyle}>
         <MainMap />
-      
       </Box>
     </Box>
   );
 };
 
-export default Home
+export default Home;

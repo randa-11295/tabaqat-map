@@ -1,26 +1,27 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 // Atoms
 export const geoDataState = atom({
-  key: 'geoDataState',
+  key: "geoDataState",
   default: {},
 });
 
-
 export const markPositionState = atom({
-  key: 'markPositionState',
+  key: "markPositionState",
   default: null,
 });
 
-
 export const wmsLayerState = atom({
-  key: 'wmsLayerState',
+  key: "wmsLayerState",
   default: {},
 });
 
-
 export const baseMapIdState = atom({
-  key: 'baseMapIdState',
+  key: "baseMapIdState",
   default: "basic-arabic-ksa-boundary",
 });
 
+export const sideBarController = atom({
+  key: "sideBarController",
+  default: { open: true },
+});
