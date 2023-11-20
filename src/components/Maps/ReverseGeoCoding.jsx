@@ -33,7 +33,20 @@ const ReverseGeoCoding = (props) => {
         })
         .then((res) => {
           console.log(res.data?.features[0]?.properties);
-          setSideBarControllerData({ children: <p>test</p>, open: true });
+          setSideBarControllerData({
+            children: (
+              <>
+                {Object.entries(res.data?.features[0]?.properties).map(
+                  ([key, value]) => (
+                    <div key={key}>
+                      <strong>{key}:</strong> {value}
+                    </div>
+                  )
+                )}
+              </>
+            ),
+            open: true,
+          });
           res.data.features[0]?.geometry
             ? (() => {
                 props.handleMarkerPointsChange({
