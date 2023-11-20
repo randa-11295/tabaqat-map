@@ -11,7 +11,7 @@ import useConfig from "../../utils/config";
 const ReverseGeoCoding = (props) => {
   const [notFound, setNotFound] = useState(false);
   const { accessToken } = useConfig();
-  const { t } = useTranslation();
+  const { t ,  i18n} = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -26,10 +26,11 @@ const ReverseGeoCoding = (props) => {
             "point.lat": values.lat,
             "point.lon": values.long,
             access_token: accessToken,
-            lang: "en",
+            lang:  i18n.language,
           },
         })
         .then((res) => {
+          console.log(res.data?.features[0].properties)
           res.data.features[0]?.geometry
             ? (() => {
                 props.handleMarkerPointsChange({
