@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "react-i18next";
 import useConfig from "../../utils/config";
-
+import useGetMapFutures from "../Hooks/useGetMapFutures";
 export default function GeoCoding(props) {
   const [selected, setSelected] = useState({});
   const [listShowed, setListShowed] = useState(false);
@@ -21,6 +21,7 @@ export default function GeoCoding(props) {
   const [val, setVal] = useState("");
   const { accessToken } = useConfig();
   const { t } = useTranslation();
+  const { controlGeoDataSideBar } = useGetMapFutures();
 
   useEffect(() => {
     if ((selected.label && val === selected.label) || !val) return;
@@ -49,7 +50,7 @@ export default function GeoCoding(props) {
   };
 
   const handleListItemClick = (el) => {
-    console.log(el.properties)
+    controlGeoDataSideBar(el.properties);
     setSelected(el?.properties);
     setVal(el?.properties.label);
     setListShowed(false);

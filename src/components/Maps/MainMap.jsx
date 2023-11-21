@@ -1,23 +1,25 @@
 import { Box } from "@mui/material";
 import { geoDataState } from "../../utils/recoilState";
 import { useRecoilState } from "recoil";
-import { useMap , MlMarker} from "@mapcomponents/react-maplibre";
+import { useMap, MlMarker } from "@mapcomponents/react-maplibre";
 import { useEffect, useState } from "react";
-import MapGenerator from "./MapGeneretor";
+import MapGenerator from "./MapGenerator";
 import WmsLayer from "./WmsLayer";
 import MapHeaderInfo from "./MapHeaderInfo";
+import useGetMapFutures from "../Hooks/useGetMapFutures";
 
 function MainMap() {
   const [markerPints, setMarkerPints] = useState({});
   const [, setDeoData] = useRecoilState(geoDataState);
   const { map: mapLibre } = useMap();
+  const { getMapFutures } = useGetMapFutures();
 
   const handleMarkerPointsChange = (points) => {
     setMarkerPints(points);
     mapLibre.flyTo({
-      center: [points.lng, points.lat], 
+      center: [points.lng, points.lat],
       zoom: 14,
-      speed: 1, 
+      speed: 1,
       curve: 1,
     });
   };
@@ -25,11 +27,10 @@ function MainMap() {
     if (!mapLibre) return;
     // Event listener for click on the map
     mapLibre.on("click", (e) => {
- 
-
       const { lngLat, point } = e;
-
+   
       // Get the current bounding box (bbox) of the map
+      getMapFutures({ lat: lngLat.lat, long: lngLat.lng });
       const bBox = mapLibre.getBounds();
       setDeoData({
         ...lngLat,
@@ -37,7 +38,7 @@ function MainMap() {
         bBox,
       });
     });
-  }, [mapLibre, setDeoData]);
+  }, [getMapFutures, mapLibre, setDeoData]);
 
   return (
     <Box sx={boxStyle}>
