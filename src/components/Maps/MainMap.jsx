@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import MapGenerator from "./MapGenerator";
 import WmsLayer from "./WmsLayer";
 import MapHeaderInfo from "./MapHeaderInfo";
-import useGetMapFutures from "../Hooks/useGetMapFutures";
+import useGetMapFutures from "../../Hooks/useGetMapFutures";
 import { markerPintsState } from "../../utils/recoilState";
 
  export default function MainMap() {

@@ -1,11 +1,11 @@
 import axios from "axios";
-import useConfig from "../../utils/config";
+import useConfig from "../utils/config";
 import { useTranslation } from "react-i18next";
-import { sideBarControllerState} from "../../utils/recoilState";
+import { sideBarControllerState} from "../utils/recoilState";
 import { useRecoilState } from "recoil";
 
-import { markerPintsState } from "../../utils/recoilState";
-import GeoDataList from "../Areas/GeoDataList";
+import { markerPintsState } from "../utils/recoilState";
+import GeoDataList from "../components/Areas/GeoDataList";
 import {Box} from "@mui/material"
 
 const useGetMapFutures = () => {

@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "react-i18next";
 import useConfig from "../../utils/config";
-import useGetMapFutures from "../Hooks/useGetMapFutures";
+import useGetMapFutures from "../../Hooks/useGetMapFutures";
 
 export default function GeoCoding() {
   const [selected, setSelected] = useState({});

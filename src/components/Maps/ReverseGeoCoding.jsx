@@ -3,12 +3,11 @@ import { Stack, Box, Typography } from "@mui/material";
 import InputTextCustom from "../Inputs/InputTextCustom";
 import SendIcon from "@mui/icons-material/Send";
 import TooltipCustomIconBtn from "../Inputs/TooltipCustomIconBtn";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useGetMapFutures from "../Hooks/useGetMapFutures"
+import useGetMapFutures from "../../Hooks/useGetMapFutures"
 
 const ReverseGeoCoding = () => {
-  const [notFound, setNotFound] = useState(false);
+
 
   const { t } = useTranslation();
   const {getMapFutures} = useGetMapFutures()
@@ -51,9 +50,7 @@ const ReverseGeoCoding = () => {
           <SendIcon sx={{ fontSize: "1.1rem" }} />
         </TooltipCustomIconBtn>
       </Stack>
-      {notFound && (
-        <Typography sx={noResultStyle}>{t("geoCoding.noResult")}</Typography>
-      )}
+  
     </Box>
   );
 };
