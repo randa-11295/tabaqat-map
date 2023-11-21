@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useFormik } from "formik";
 import { Stack, Box, Typography } from "@mui/material";
 import InputTextCustom from "../Inputs/InputTextCustom";
@@ -6,15 +5,14 @@ import SendIcon from "@mui/icons-material/Send";
 import TooltipCustomIconBtn from "../Inputs/TooltipCustomIconBtn";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useConfig from "../../utils/config";
-import { sideBarController } from "../../utils/recoilState";
-import { useRecoilState } from "recoil";
+import useGetMapFutures from "../Hooks/useGetMapFutures"
 
-const ReverseGeoCoding = (props) => {
+const ReverseGeoCoding = () => {
   const [notFound, setNotFound] = useState(false);
-  const { accessToken } = useConfig();
-  const { t, i18n } = useTranslation();
-  const [, setSideBarControllerData] = useRecoilState(sideBarController);
+
+  const { t } = useTranslation();
+  const {getMapFutures} = useGetMapFutures()
+
   const formik = useFormik({
     initialValues: {
       lat: 0,
@@ -22,44 +20,7 @@ const ReverseGeoCoding = (props) => {
     },
     onSubmit: (values) => {
       if (!values.lat || !values.lat) return;
-      axios
-        .get(`https://geocoder.tabaqat.net/v1/reverse`, {
-          params: {
-            "point.lat": values.lat,
-            "point.lon": values.long,
-            access_token: accessToken,
-            lang: i18n.language,
-          },
-        })
-        .then((res) => {
-          console.log(res.data?.features[0]?.properties);
-          setSideBarControllerData({
-            children: (
-              <>
-                {Object.entries(res.data?.features[0]?.properties).map(
-                  ([key, value]) => (
-                    <div key={key}>
-                      <strong>{key}:</strong> {value}
-                    </div>
-                  )
-                )}
-              </>
-            ),
-            open: true,
-          });
-          res.data.features[0]?.geometry
-            ? (() => {
-                props.handleMarkerPointsChange({
-                  lat: res.data?.features[0]?.geometry?.coordinates[1],
-                  lng: res.data?.features[0]?.geometry?.coordinates[0],
-                });
-                setNotFound(false);
-              })()
-            : setNotFound(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      getMapFutures(values)
     },
   });
 
