@@ -1,12 +1,12 @@
 import Drawer from "@mui/material/Drawer";
 import useConfig from "../../utils/config";
-import { sideBarController } from "../../utils/recoilState";
+import { sideBarControllerState} from "../../utils/recoilState";
 import { useRecoilState } from "recoil";
 
 const SideBar = (props) => {
   const { drawerWidth } = useConfig();
-  const [sideBarControllerData, setSideBarControllerData] =
-    useRecoilState(sideBarController);
+  const [sideBarController, setSideBarController] =
+    useRecoilState(sideBarControllerState);
 
   const drawerStyle = {
     display: props.mob
@@ -24,7 +24,7 @@ const SideBar = (props) => {
 
   const closeHandle = (e) => {
     if (!e.target.classList.contains("MuiBackdrop-root") || !props.mob) return;
-    setSideBarControllerData({
+    setSideBarController({
       open: false,
       children: null,
     });
@@ -34,14 +34,14 @@ const SideBar = (props) => {
     <Drawer
       container={props.container}
       variant={props.variant}
-      open={sideBarControllerData.open}
+      open={sideBarController.open}
       ModalProps={{
         keepMounted: true,
         onClick: closeHandle,
       }}
       sx={drawerStyle}
     >
-      {sideBarControllerData.children}
+      {sideBarController.children}
     </Drawer>
   );
 };

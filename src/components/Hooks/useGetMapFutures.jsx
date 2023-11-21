@@ -1,19 +1,22 @@
 import axios from "axios";
 import useConfig from "../../utils/config";
 import { useTranslation } from "react-i18next";
-import { sideBarController } from "../../utils/recoilState";
+import { sideBarControllerState} from "../../utils/recoilState";
 import { useRecoilState } from "recoil";
 import { isString } from "../../utils/helpers";
+import { markerPintsState } from "../../utils/recoilState";
 
 const useGetMapFutures = () => {
   const { accessToken } = useConfig();
   const { i18n } = useTranslation();
-  const [, setSideBarControllerData] = useRecoilState(sideBarController);
+  const [, setSideBarController] = useRecoilState(sideBarControllerState);
+  const [ , setMarkerPints] = useRecoilState(markerPintsState);
 
-  const controlGeoDataSideBar = (valuesOpj) => {
-    console.log(valuesOpj);
+  const controlGeoDataSideBar = (valuesOpj, points) => {
+  
+    setMarkerPints(points);
     // <ListItemText primary={val + t("geoCoding.notAvailable")} />
-    setSideBarControllerData({
+    setSideBarController({
       children: (
         <>
           {Object.entries(valuesOpj).map(
@@ -42,18 +45,12 @@ const useGetMapFutures = () => {
       })
       .then((res) => {
         res.data.features[0].properties &&
-          controlGeoDataSideBar(res.data.features[0].properties);
+          controlGeoDataSideBar(res.data.features[0].properties, {
+            lat: values.lat,
+            lng: values.long,
+          });
       })
-      //   res.data.features[0]?.geometry
-      //     ? (() => {
-      //         props.handleMarkerPointsChange({
-      //           lat: res.data?.features[0]?.geometry?.coordinates[1],
-      //           lng: res.data?.features[0]?.geometry?.coordinates[0],
-      //         });
-      //         setNotFound(false);
-      //       })()
-      //     : setNotFound(true);
-      // })
+
       .catch((err) => {
         console.log(err);
       });

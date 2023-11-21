@@ -3,18 +3,18 @@ import MainMap from "../components/Maps/MainMap";
 import Navbar from "../components/Navbar/Navbar";
 import { Box, useMediaQuery } from "@mui/material";
 import useConfig from "../utils/config";
-import { sideBarController } from "../utils/recoilState";
+import { sideBarControllerState} from "../utils/recoilState";
 import { useRecoilState } from "recoil";
 import { useTheme } from "@mui/material/styles";
 import TabsSideBar from "../components/Navbar/TabsSideBar";
 
 const Home = () => {
   const { drawerWidth } = useConfig();
-  const [sideBarControllerData, setSideBarControllerData] =
-    useRecoilState(sideBarController);
+  const [sideBarController, setSideBarController] =
+    useRecoilState(sideBarControllerState);
 
   const controlNaVSideBarHandle = (open, element) => {
-    setSideBarControllerData({ open: open, children: element });
+    setSideBarController({ open: open, children: element });
   };
 
   const theme = useTheme();
@@ -28,7 +28,7 @@ const Home = () => {
   }, [isMatchesBigScreen]);
 
   const BoxMapStyle = {
-    width: !sideBarControllerData.open
+    width: !sideBarController.open
       ? "100%"
       : {
           xs: "100%",

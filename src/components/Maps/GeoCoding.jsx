@@ -14,7 +14,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "react-i18next";
 import useConfig from "../../utils/config";
 import useGetMapFutures from "../Hooks/useGetMapFutures";
-export default function GeoCoding(props) {
+
+export default function GeoCoding() {
   const [selected, setSelected] = useState({});
   const [listShowed, setListShowed] = useState(false);
   const [autocompleteOption, setAutocompleteOption] = useState([]);
@@ -50,14 +51,14 @@ export default function GeoCoding(props) {
   };
 
   const handleListItemClick = (el) => {
-    controlGeoDataSideBar(el.properties);
-    setSelected(el?.properties);
-    setVal(el?.properties.label);
-    setListShowed(false);
-    props.handleMarkerPointsChange({
+    controlGeoDataSideBar(el.properties , {
       lat: el?.geometry.coordinates[1],
       lng: el?.geometry.coordinates[0],
     });
+    setSelected(el?.properties);
+    setVal(el?.properties.label);
+    setListShowed(false);
+
   };
 
   return (

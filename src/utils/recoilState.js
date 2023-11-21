@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-// Atoms
+
 export const geoDataState = atom({
   key: "geoDataState",
   default: {},
@@ -21,7 +21,13 @@ export const baseMapIdState = atom({
   default: "basic-arabic-ksa-boundary",
 });
 
-export const sideBarController = atom({
-  key: "sideBarController",
+export const sideBarControllerState = atom({
+  key: "sideBarControllerState",
   default: { open: true },
 });
+
+export const markerPintsState = atom({
+  key: "markerPintsState",
+  default: { },
+});
+

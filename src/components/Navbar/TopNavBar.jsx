@@ -14,12 +14,12 @@ import { useTranslation } from "react-i18next";
 import ModelReusable from "../Reusable/ModelReusable";
 import { useRecoilState } from "recoil";
 import { wmsLayerState } from "../../utils/recoilState";
-import { sideBarController } from "../../utils/recoilState";
+import { sideBarControllerState} from "../../utils/recoilState";
 import TabsSideBar from "./TabsSideBar";
 const TopNavbar = () => {
   const [wmsLayerGlobeData] = useRecoilState(wmsLayerState);
-  const [sideBarControllerData, setSideBarControllerData] =
-    useRecoilState(sideBarController);
+  const [sideBarController, setSideBarController] =
+    useRecoilState(sideBarControllerState);
 
   const { drawerWidth } = useConfig();
   const { i18n, t } = useTranslation();
@@ -31,12 +31,12 @@ const TopNavbar = () => {
   };
 
   const handleDrawerToggle = () =>
-    sideBarControllerData.open
-      ? setSideBarControllerData({
+    sideBarController.open
+      ? setSideBarController({
           open: false,
           children: null,
         })
-      : setSideBarControllerData({
+      : setSideBarController({
           open: true,
           children: <TabsSideBar />,
         });
@@ -45,17 +45,17 @@ const TopNavbar = () => {
     <AppBar
       position="fixed"
       color="default"
-      open={sideBarControllerData.open}
+      open={sideBarController.open}
       sx={{
         width: {
           xs: "100%",
-          md: sideBarControllerData.open
+          md: sideBarController.open
             ? `calc(100% - ${drawerWidth.md} )`
             : "100%",
-          lg: sideBarControllerData.open
+          lg: sideBarController.open
             ? `calc(100% - ${drawerWidth.lg} )`
             : "100%",
-          xl: sideBarControllerData.open
+          xl: sideBarController.open
             ? `calc(100% - ${drawerWidth.xl} )`
             : "100%",
         },
