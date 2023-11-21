@@ -20,9 +20,9 @@ import { markerPintsState } from "../../utils/recoilState";
     if (!mapLibre || !markerPints.lng || !markerPints.lat) return;
     mapLibre.flyTo({
       center: [markerPints.lng, markerPints.lat],
-      zoom: 14,
+      zoom: 9,
       speed: 1,
-      curve: 1,
+      curve: 1.5,
     });
   }, [mapLibre, markerPints.lng, markerPints.lat, markerPints]);
 
