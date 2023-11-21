@@ -31,7 +31,7 @@ const GeoDataList = (props) => {
       <>
         <Grid item xs={12}>
           <Typography component="h6" mb={1} variant="h6" sx={{ mb: 2 }}>
-            {t(`geoData.${"features"}`)}
+            {t(`geoData.features`)}
           </Typography>
         </Grid>
         {props.featuresOpj &&

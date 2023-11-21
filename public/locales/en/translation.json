@@ -14,7 +14,8 @@
         "northEast": "north East",
         "northWest": "north West",
         "southWest": "south West",
-        "southEast": "south East"
+        "southEast": "south East",
+        "features" :"Features" 
     },
     "geoCoding": {
         "noResult": "No Result Available",

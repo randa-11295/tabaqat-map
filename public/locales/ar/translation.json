@@ -14,7 +14,9 @@
         "northEast": "الشمال الشرقي",
         "northWest": "الشمال الغربي",
         "southWest": "الجنوب الغربي",
-        "southEast": "الجنوب الشرقي"
+        "southEast": "الجنوب الشرقي",
+        "features" :"السمات" 
+
     },
     "geoCoding": {
         "noResult": " لا توجد بيانات متوفره",
