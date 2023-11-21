@@ -3,8 +3,10 @@ import useConfig from "../../utils/config";
 import { useTranslation } from "react-i18next";
 import { sideBarControllerState} from "../../utils/recoilState";
 import { useRecoilState } from "recoil";
-import { isString } from "../../utils/helpers";
+
 import { markerPintsState } from "../../utils/recoilState";
+import GeoDataList from "../Areas/GeoDataList";
+import {Box} from "@mui/material"
 
 const useGetMapFutures = () => {
   const { accessToken } = useConfig();
@@ -18,16 +20,10 @@ const useGetMapFutures = () => {
     // <ListItemText primary={val + t("geoCoding.notAvailable")} />
     setSideBarController({
       children: (
-        <>
-          {Object.entries(valuesOpj).map(
-            ([key, value]) =>
-              isString(value) && (
-                <div key={key}>
-                  <strong>{key}:</strong> {value}
-                </div>
-              )
-          )}
-        </>
+        <Box p={3}>
+        <GeoDataList featuresOpj={valuesOpj} />
+    
+        </Box >
       ),
       open: true,
     });
