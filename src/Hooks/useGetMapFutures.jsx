@@ -40,6 +40,7 @@ const useGetMapFutures = () => {
         },
       })
       .then((res) => {
+        console.log(res.data.bbox , )
         res.data.features[0].properties &&
           controlGeoDataSideBar(res.data.features[0].properties, {
             lat: values.lat,

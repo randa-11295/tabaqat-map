@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { Stack, Box, Typography } from "@mui/material";
+import { Stack, Box } from "@mui/material";
 import InputTextCustom from "../Inputs/InputTextCustom";
 import SendIcon from "@mui/icons-material/Send";
 import TooltipCustomIconBtn from "../Inputs/TooltipCustomIconBtn";
@@ -66,9 +66,3 @@ const BoxStyle = {
   border: "#16aa9d 1px  solid",
 };
 
-const noResultStyle = {
-  p: 1,
-  color: "grey",
-  fontWeight: "800",
-  fontSize: ".85rem",
-};

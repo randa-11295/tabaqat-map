@@ -24,6 +24,25 @@ const useConfig = () => {
     getLayersImageURL: (layerName, categoryName) => {
       return `https://data.tabaqat.net/geoserver/${categoryName}/wms?layers=${categoryName}%3A${layerName}&access_token=${access_token}&service=WMS&version=1.1.0&request=GetMap&bbox=34.57222222222222%2C16.369444444444444%2C55.638888888888886%2C32.56388888888889&width=768&height=590&srs=EPSG%3A4326&styles=&format=image%2Fpng`;
     },
+
+    isString: (variable) => {
+      return typeof variable === "string";
+    },
+
+    convertLatLonToXY: (latitude, longitude) => {
+      // Convert degrees to radians
+      const latRad = (latitude * Math.PI) / 180;
+      const lonRad = (longitude * Math.PI) / 180;
+
+      // Earth radius in kilometers
+      const R = 6371.0;
+
+      // Calculate Cartesian coordinates
+      const x = R * Math.cos(latRad) * Math.cos(lonRad);
+      const y = R * Math.cos(latRad) * Math.sin(lonRad);
+
+      return { x, y };
+    },
     drawerWidth: {
       xs: "290px",
       sm: "350px",
