@@ -8,13 +8,11 @@
         "lat": "Latitude",
         "long": "Longitude",
         "bBox": "bBox",
-        "points": "Points",
-        "pointY": "point Y",
-        "pointX": "point X",
         "northEast": "north East",
         "northWest": "north West",
         "southWest": "south West",
-        "southEast": "south East"
+        "southEast": "south East",
+        "features" :"Features" 
     },
     "geoCoding": {
         "noResult": "No Result Available",

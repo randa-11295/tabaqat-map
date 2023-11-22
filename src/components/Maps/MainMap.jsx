@@ -1,35 +1,39 @@
 import { Box } from "@mui/material";
 import { geoDataState } from "../../utils/recoilState";
 import { useRecoilState } from "recoil";
-import { useMap , MlMarker} from "@mapcomponents/react-maplibre";
-import { useEffect, useState } from "react";
-import MapGenerator from "./MapGeneretor";
+import { useMap, MlMarker } from "@mapcomponents/react-maplibre";
+import { useEffect } from "react";
+import MapGenerator from "./MapGenerator";
 import WmsLayer from "./WmsLayer";
 import MapHeaderInfo from "./MapHeaderInfo";
+import useGetMapFutures from "../../Hooks/useGetMapFutures";
+import { markerPintsState } from "../../utils/recoilState";
 
-function MainMap() {
-  const [markerPints, setMarkerPints] = useState({});
+ export default function MainMap() {
+
   const [, setDeoData] = useRecoilState(geoDataState);
   const { map: mapLibre } = useMap();
+  const { getMapFutures } = useGetMapFutures();
+  const [markerPints] = useRecoilState(markerPintsState);
 
-  const handleMarkerPointsChange = (points) => {
-    setMarkerPints(points);
+  useEffect(() => {
+    if (!mapLibre || !markerPints.lng || !markerPints.lat) return;
     mapLibre.flyTo({
-      center: [points.lng, points.lat], 
-      zoom: 14,
-      speed: 1, 
-      curve: 1,
+      center: [markerPints.lng, markerPints.lat],
+      zoom: 9,
+      speed: 1,
+      curve: 1.5,
     });
-  };
+  }, [mapLibre, markerPints.lng, markerPints.lat, markerPints]);
+
   useEffect(() => {
     if (!mapLibre) return;
     // Event listener for click on the map
     mapLibre.on("click", (e) => {
- 
-
       const { lngLat, point } = e;
 
       // Get the current bounding box (bbox) of the map
+      getMapFutures({ lat: lngLat.lat, long: lngLat.lng });
       const bBox = mapLibre.getBounds();
       setDeoData({
         ...lngLat,
@@ -37,13 +41,13 @@ function MainMap() {
         bBox,
       });
     });
-  }, [mapLibre, setDeoData]);
+  }, [getMapFutures, mapLibre, setDeoData]);
 
   return (
     <Box sx={boxStyle}>
       <MapGenerator />
       <WmsLayer />
-      <MapHeaderInfo handleMarkerPointsChange={handleMarkerPointsChange} />
+      <MapHeaderInfo />
       {markerPints.lat && markerPints.lng && (
         <MlMarker lat={markerPints?.lat} lng={markerPints?.lng} />
       )}
@@ -51,7 +55,6 @@ function MainMap() {
   );
 }
 
-export default MainMap;
 
 const boxStyle = {
   width: "100%",

@@ -1,30 +1,17 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import SideBar from "./SideBar";
 import TopNavbar from "./TopNavBar";
 import useConfig from "../../utils/config";
-
+import { sideBarControllerState} from "../../utils/recoilState";
+import { useRecoilState } from "recoil";
 function Navbar(props) {
-
-  const {drawerWidth} = useConfig();
+  const { drawerWidth } = useConfig();
 
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [bigScreenOpen, setBigScreenOpen] = useState(true);
 
-
-  const handleMobileDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  const handleBigScreenOpenDrawerToggle = () => {
-    setBigScreenOpen(!bigScreenOpen);
-    props.closeNaVSideBarHandle(!bigScreenOpen);
-  };
-
-
+  const [sideBarController] = useRecoilState(sideBarControllerState);
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -33,26 +20,16 @@ function Navbar(props) {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
 
-      <TopNavbar
-        handleBigScreenOpenDrawerToggle={handleBigScreenOpenDrawerToggle}
-        handleMobileDrawerToggle={handleMobileDrawerToggle}
-        bigScreenOpen={bigScreenOpen}
-      />
+      <TopNavbar />
       <Box
         component="nav"
-        sx={{ width: { ...drawerWidth ,  xs: 0 }, flexShrink: { sm: 0 } }}
+        sx={{ width: { ...drawerWidth, xs: 0 }, flexShrink: { sm: 0 } }}
       >
         {/* mobile nav big screen */}
-        <SideBar
-          open={mobileOpen}
-          container={container}
-          handleMobileDrawerToggle={handleMobileDrawerToggle}
-          mob
-          variant="temporary"
-        />
+        <SideBar container={container} mob variant="temporary" />
 
         {/* side nav big screen */}
-        <SideBar open={bigScreenOpen} variant="persistent" />
+        <SideBar open={sideBarController} variant="persistent" />
       </Box>
     </Box>
   );

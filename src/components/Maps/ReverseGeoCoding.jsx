@@ -1,17 +1,16 @@
-import axios from "axios";
 import { useFormik } from "formik";
-import { Stack, Box, Typography } from "@mui/material";
+import { Stack, Box } from "@mui/material";
 import InputTextCustom from "../Inputs/InputTextCustom";
 import SendIcon from "@mui/icons-material/Send";
 import TooltipCustomIconBtn from "../Inputs/TooltipCustomIconBtn";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useConfig from "../../utils/config";
+import useGetMapFutures from "../../Hooks/useGetMapFutures"
 
-const ReverseGeoCoding = (props) => {
-  const [notFound, setNotFound] = useState(false);
-  const { accessToken } = useConfig();
+const ReverseGeoCoding = () => {
+
+
   const { t } = useTranslation();
+  const {getMapFutures} = useGetMapFutures()
 
   const formik = useFormik({
     initialValues: {
@@ -20,29 +19,7 @@ const ReverseGeoCoding = (props) => {
     },
     onSubmit: (values) => {
       if (!values.lat || !values.lat) return;
-      axios
-        .get(`https://geocoder.tabaqat.net/v1/reverse`, {
-          params: {
-            "point.lat": values.lat,
-            "point.lon": values.long,
-            access_token: accessToken,
-            lang: "en",
-          },
-        })
-        .then((res) => {
-          res.data.features[0]?.geometry
-            ? (() => {
-                props.handleMarkerPointsChange({
-                  lat: res.data?.features[0]?.geometry?.coordinates[1],
-                  lng: res.data?.features[0]?.geometry?.coordinates[0],
-                });
-                setNotFound(false);
-              })()
-            : setNotFound(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      getMapFutures(values)
     },
   });
 
@@ -73,9 +50,7 @@ const ReverseGeoCoding = (props) => {
           <SendIcon sx={{ fontSize: "1.1rem" }} />
         </TooltipCustomIconBtn>
       </Stack>
-      {notFound && (
-        <Typography sx={noResultStyle}>{t("geoCoding.noResult")}</Typography>
-      )}
+  
     </Box>
   );
 };
@@ -91,9 +66,3 @@ const BoxStyle = {
   border: "#16aa9d 1px  solid",
 };
 
-const noResultStyle = {
-  p: 1,
-  color: "grey",
-  fontWeight: "800",
-  fontSize: ".85rem",
-};

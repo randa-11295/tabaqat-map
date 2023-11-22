@@ -1,20 +1,34 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import MainMap from "../components/Maps/MainMap";
 import Navbar from "../components/Navbar/Navbar";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import useConfig from "../utils/config";
-
+import { sideBarControllerState} from "../utils/recoilState";
+import { useRecoilState } from "recoil";
+import { useTheme } from "@mui/material/styles";
+import TabsSideBar from "../components/Navbar/TabsSideBar";
 
 const Home = () => {
-  const [isSideNaVOpen, setIsSideNavOpen] = useState(true);
   const { drawerWidth } = useConfig();
+  const [sideBarController, setSideBarController] =
+    useRecoilState(sideBarControllerState);
 
-  const closeNaVSideBarHandle = (val) => {
-    setIsSideNavOpen(val);
+  const controlNaVSideBarHandle = (open, element) => {
+    setSideBarController({ open: open, children: element });
   };
 
+  const theme = useTheme();
+  const isMatchesBigScreen = useMediaQuery(theme.breakpoints.up("md"));
+
+  useEffect(() => {
+    isMatchesBigScreen
+      ? controlNaVSideBarHandle(true, <TabsSideBar />)
+      : controlNaVSideBarHandle(false, null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMatchesBigScreen]);
+
   const BoxMapStyle = {
-    width: !isSideNaVOpen
+    width: !sideBarController.open
       ? "100%"
       : {
           xs: "100%",
@@ -31,13 +45,14 @@ const Home = () => {
 
   return (
     <Box sx={{ height: "100vh" }}>
-      <Navbar closeNaVSideBarHandle={closeNaVSideBarHandle} />
+      <Navbar
+        closeNaVSideBarHandle={() => controlNaVSideBarHandle(false, null)}
+      />
       <Box sx={BoxMapStyle}>
         <MainMap />
-      
       </Box>
     </Box>
   );
 };
 
-export default Home
+export default Home;

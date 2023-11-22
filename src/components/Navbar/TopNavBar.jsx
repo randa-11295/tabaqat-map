@@ -14,9 +14,13 @@ import { useTranslation } from "react-i18next";
 import ModelReusable from "../Reusable/ModelReusable";
 import { useRecoilState } from "recoil";
 import { wmsLayerState } from "../../utils/recoilState";
-
-const TopNavbar = (props) => {
+import { sideBarControllerState} from "../../utils/recoilState";
+import TabsSideBar from "./TabsSideBar";
+const TopNavbar = () => {
   const [wmsLayerGlobeData] = useRecoilState(wmsLayerState);
+  const [sideBarController, setSideBarController] =
+    useRecoilState(sideBarControllerState);
+
   const { drawerWidth } = useConfig();
   const { i18n, t } = useTranslation();
 
@@ -26,17 +30,34 @@ const TopNavbar = (props) => {
       : i18n.changeLanguage("en");
   };
 
+  const handleDrawerToggle = () =>
+    sideBarController.open
+      ? setSideBarController({
+          open: false,
+          children: null,
+        })
+      : setSideBarController({
+          open: true,
+          children: <TabsSideBar />,
+        });
+
   return (
     <AppBar
       position="fixed"
       color="default"
-      open={props.bigScreenOpen}
+      open={sideBarController.open}
       sx={{
         width: {
           xs: "100%",
-          md: props.bigScreenOpen ? `calc(100% - ${drawerWidth.md} )` : "100%",
-          lg: props.bigScreenOpen ? `calc(100% - ${drawerWidth.lg} )` : "100%",
-          xl: props.bigScreenOpen ? `calc(100% - ${drawerWidth.xl} )` : "100%",
+          md: sideBarController.open
+            ? `calc(100% - ${drawerWidth.md} )`
+            : "100%",
+          lg: sideBarController.open
+            ? `calc(100% - ${drawerWidth.lg} )`
+            : "100%",
+          xl: sideBarController.open
+            ? `calc(100% - ${drawerWidth.xl} )`
+            : "100%",
         },
         marginLeft: {
           md: drawerWidth.md,
@@ -61,7 +82,7 @@ const TopNavbar = (props) => {
           <IconButton
             color="primary"
             aria-label="open drawer"
-            onClick={props.handleMobileDrawerToggle}
+            onClick={handleDrawerToggle}
             sx={{ display: { md: "none" } }}
           >
             <MenuIcon />
@@ -72,7 +93,7 @@ const TopNavbar = (props) => {
             size="small"
             aria-label="open drawer"
             variant="contained"
-            onClick={props.handleBigScreenOpenDrawerToggle}
+            onClick={handleDrawerToggle}
             sx={btnBigScreenStyle}
           >
             <MenuIcon />

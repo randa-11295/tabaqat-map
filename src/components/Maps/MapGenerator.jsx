@@ -2,7 +2,6 @@ import { MapLibreMap } from "@mapcomponents/react-maplibre";
 import { useRecoilState } from "recoil";
 import { baseMapIdState } from "../../utils/recoilState";
 import useConfig from "../../utils/config";
-import { useExportMap } from "@mapcomponents/react-maplibre";
 import mainMap from "maplibre-gl";
 
 mainMap.setRTLTextPlugin(
