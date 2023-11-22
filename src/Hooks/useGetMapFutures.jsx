@@ -21,8 +21,7 @@ const useGetMapFutures = () => {
     setSideBarController({
       children: (
         <Box p={3}>
-        <GeoDataList featuresOpj={valuesOpj} />
-    
+        <GeoDataList data={valuesOpj} />
         </Box >
       ),
       open: true,
@@ -40,9 +39,10 @@ const useGetMapFutures = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.bbox , )
+        // console.log(res.data.bbox , )
+        // console.log(res.data , )
         res.data.features[0].properties &&
-          controlGeoDataSideBar(res.data.features[0].properties, {
+          controlGeoDataSideBar(res.data.features[0], {
             lat: values.lat,
             lng: values.long,
           });

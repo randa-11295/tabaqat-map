@@ -4,7 +4,8 @@ export default function GeoDataCard(props) {
   return (
     <Card sx={cardStyle}>
       <Typography sx={titleStyle} gutterBottom>
-        {props.title?.replaceAll("_", " ")}
+        {/* {props?.title?.replaceAll("_", " ") || 0} */}
+        {props?.title}
       </Typography>
       <Typography
         noWrap
@@ -12,7 +13,7 @@ export default function GeoDataCard(props) {
         sx={{ fontSize: "1.35rem" }}
         color="info.main"
       >
-        {props.data || 0}
+        {props?.data || 0}
       </Typography>
     </Card>
   );

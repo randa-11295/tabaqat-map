@@ -17,7 +17,7 @@ const useConfig = () => {
       return `https://data.tabaqat.net/geoserver/${workspaceName}/${wmsName}/wms?access_token=${access_token}`;
     },
 
-    getAssetURL: (id) => {
+    getAssetIconURL: (id) => {
       if (!id) return null;
       return `https://catalog.tabaqat.net/assets/${id}`;
     },
@@ -29,20 +29,6 @@ const useConfig = () => {
       return typeof variable === "string";
     },
 
-    convertLatLonToXY: (latitude, longitude) => {
-      // Convert degrees to radians
-      const latRad = (latitude * Math.PI) / 180;
-      const lonRad = (longitude * Math.PI) / 180;
-
-      // Earth radius in kilometers
-      const R = 6371.0;
-
-      // Calculate Cartesian coordinates
-      const x = R * Math.cos(latRad) * Math.cos(lonRad);
-      const y = R * Math.cos(latRad) * Math.sin(lonRad);
-
-      return { x, y };
-    },
     drawerWidth: {
       xs: "290px",
       sm: "350px",
@@ -50,52 +36,11 @@ const useConfig = () => {
       lg: "400px",
       xl: "420px",
     },
-    geoDatArr: [
-      {
-        name: "coordinates",
-        isTitle: true,
-      },
-      {
-        name: "lat",
-        data: geoData?.lat,
-      },
-      {
-        name: "long",
-        data: geoData?.lng,
-      },
-      {
-        name: "points",
-        isTitle: true,
-      },
-      {
-        name: "pointY",
-        data: geoData?.y,
-      },
-      {
-        name: "pointX",
-        data: geoData?.x,
-      },
-      {
-        name: "bBox",
-        isTitle: true,
-      },
-      {
-        name: "northEast",
-        data: geoData?.bBox?._ne?.lat,
-      },
-      {
-        name: "northWest",
-        data: geoData?.bBox?._ne?.lng,
-      },
-      {
-        name: "southWest",
-        data: geoData?.bBox?._sw?.lat,
-      },
-      {
-        name: "southEast",
-        data: geoData?.bBox?._sw?.lng,
-      },
-    ],
+    geoDataTitles: {
+      bBox: ["northEast", "northWest", "southWest", "southEast"],
+      coordinates: ["lat", "long"],
+
+    }
   };
 };
 
