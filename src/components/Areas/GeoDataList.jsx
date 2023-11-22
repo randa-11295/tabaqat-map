@@ -2,14 +2,12 @@ import GeoDataCard from "../Cards/GeoDataCard";
 import { Grid, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import useConfig from "../../utils/config";
-import { useEffect } from "react";
+
 
 const GeoDataList = (props) => {
   const { t } = useTranslation();
   const { geoDataTitles, isString } = useConfig();
-  useEffect(() => {
-    console.log(console.log(props.data));
-  });
+
   return (
     <Grid container columnSpacing={1.5}>
      
