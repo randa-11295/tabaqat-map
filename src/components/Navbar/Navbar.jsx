@@ -4,14 +4,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 import SideBar from "./SideBar";
 import TopNavbar from "./TopNavBar";
 import useConfig from "../../utils/config";
-import { sideBarControllerState} from "../../utils/recoilState";
-import { useRecoilState } from "recoil";
+
 function Navbar(props) {
   const { drawerWidth } = useConfig();
 
   const { window } = props;
 
-  const [sideBarController] = useRecoilState(sideBarControllerState);
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -29,7 +27,7 @@ function Navbar(props) {
         <SideBar container={container} mob variant="temporary" />
 
         {/* side nav big screen */}
-        <SideBar open={sideBarController} variant="persistent" />
+        <SideBar  variant="persistent" />
       </Box>
     </Box>
   );
