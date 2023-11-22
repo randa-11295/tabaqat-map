@@ -1,9 +1,7 @@
-import { useRecoilState } from "recoil";
-import { geoDataState } from "./recoilState";
 
 const useConfig = () => {
   const access_token = "tabaqat-UHJiK-NMGP-EkNN7G6aMEQ";
-  const [geoData] = useRecoilState(geoDataState);
+  
   return {
     centerArr: [45, 24],
     zoomLevel: 4,

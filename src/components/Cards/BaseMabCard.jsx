@@ -5,8 +5,9 @@ import useConfig from "../../utils/config";
 import { useTranslation } from "react-i18next";
 export default function BaseMapCard(props) {
   const [baseMapGlobeId, setBaseMapGlobeId] = useRecoilState(baseMapIdState);
-  const { getAssetURL } = useConfig();
+  const { getAssetIconURL } = useConfig();
   const { i18n } = useTranslation();
+  
   return (
     <Card
       sx={cardStyle}
@@ -21,7 +22,7 @@ export default function BaseMapCard(props) {
             sx={{ border: 0.1, borderColor: "secondary.contrastText" }}
             variant="rounded"
             alt={props.data.basemap_id}
-            src={props.data.image.id && getAssetURL(props.data.image.id)}
+            src={props.data.image.id && getAssetIconURL(props.data.image.id)}
           />
         }
         action={

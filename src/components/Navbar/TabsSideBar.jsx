@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { Tab, Box } from "@mui/material";
-import {TabContext , TabList ,TabPanel } from "@mui/lab";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
-import GpsFixedOutlinedIcon from "@mui/icons-material/GpsFixedOutlined";
-import GeoDataList from "../Areas/GeoDataList";
 import BaseMapsList from "../Areas/BaseMapsList";
 import MapServicesPanel from "../Areas/MapServicesPanel/MapServicesPanel";
 
@@ -25,34 +23,28 @@ export default function LabTabs() {
   };
 
   return (
-      <TabContext value={value}>
-        <Box sx={headerTapsStyle}>
-          <TabList
-            onChange={handleChange}
-            centered
-            value={value}
-            aria-label="basic tabs example"
-            sx={{
-              "& *": { color: "white" },
-              "& .Mui-selected *": { color: "inherit  " },
-            }}
-          >
-            <Tab icon={<LayersOutlinedIcon />} value="0" />
-            <Tab icon={<GpsFixedOutlinedIcon />} value="1" />
-            <Tab icon={<MapOutlinedIcon />} value="2" />
-          </TabList>
-        </Box>
+    <TabContext value={value}>
+      <Box sx={headerTapsStyle}>
+        <TabList
+          onChange={handleChange}
+          value={value}
+          sx={{
+            "& *": { color: "white" },
+            "& .Mui-selected *": { color: "inherit  " },
+          }}
+        >
+          <Tab icon={<LayersOutlinedIcon />} value="0" />
 
-        <TabPanel value="0">
-          <MapServicesPanel />
-        </TabPanel>
-        <TabPanel value="1">
-          <GeoDataList />
-        </TabPanel>
-        <TabPanel value="2">
-          <BaseMapsList />
-        </TabPanel>
-      </TabContext>
-  
+          <Tab icon={<MapOutlinedIcon />} value="1" />
+        </TabList>
+      </Box>
+
+      <TabPanel value="0">
+        <MapServicesPanel />
+      </TabPanel>
+      <TabPanel value="1">
+        <BaseMapsList />
+      </TabPanel>
+    </TabContext>
   );
 }
