@@ -18,7 +18,7 @@ const LayersListBtns = (props) => {
   const [, setWmsLayer] = useRecoilState(wmsLayerState);
 
   const selectLayerHandle = (val) => {
-    setSelectedVal(val?.id);
+    setSelectedVal(val?.id || false);
     setWmsLayer(val);
   };
 
@@ -69,7 +69,10 @@ const LayersListBtns = (props) => {
               <LayerCard
                 key={el?.id}
                 data={el}
-                selectLayerHandle={() => selectLayerHandle(el)}
+                selectLayerHandle={() => {
+                  selectedVal === el?.id? selectLayerHandle(false) : selectLayerHandle(el)
+          }
+                }
                 isSelected={selectedVal === el?.id}
               />
             ))
