@@ -23,7 +23,6 @@ const LayersListBtns = (props) => {
   };
 
   useEffect(() => {
-    console.log(wmsLayer.id)   
     wmsLayer.id && !selectedVal && setSelectedVal(wmsLayer.id);
   }, [selectedVal, wmsLayer]);
 
