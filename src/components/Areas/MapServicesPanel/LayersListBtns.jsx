@@ -11,16 +11,21 @@ import LoaderCard from "../../Cards/LoaderCard";
 import NoResult from "../NoResult";
 
 const LayersListBtns = (props) => {
-  const [selectedVal, setSelectedVal] = useState("");
+  const [selectedVal, setSelectedVal] = useState(false);
   const [layersCategory, setLayersCategory] = useState([]);
 
   const { i18n } = useTranslation();
-  const [, setWmsLayer] = useRecoilState(wmsLayerState);
+  const [wmsLayer, setWmsLayer] = useRecoilState(wmsLayerState);
 
   const selectLayerHandle = (val) => {
     setSelectedVal(val?.id || false);
     setWmsLayer(val);
   };
+
+  useEffect(() => {
+    console.log(wmsLayer.id)   
+    wmsLayer.id && !selectedVal && setSelectedVal(wmsLayer.id);
+  }, [selectedVal, wmsLayer]);
 
   const {
     data: LayersRes,
@@ -70,9 +75,10 @@ const LayersListBtns = (props) => {
                 key={el?.id}
                 data={el}
                 selectLayerHandle={() => {
-                  selectedVal === el?.id? selectLayerHandle(false) : selectLayerHandle(el)
-          }
-                }
+                  selectedVal === el?.id
+                    ? selectLayerHandle(false)
+                    : selectLayerHandle(el);
+                }}
                 isSelected={selectedVal === el?.id}
               />
             ))
