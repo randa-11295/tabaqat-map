@@ -31,6 +31,10 @@ const CategoryOption = (props) => {
     setCategoriesResArr(newCategoryArr);
   }, [categoryRes]);
 
+  useEffect(() => {
+    console.log(props);
+  }, [props]);
+ 
   return (
     <>
       <Typography component="h5" mb={1} variant="h5" sx={{ mb: 2 }}>

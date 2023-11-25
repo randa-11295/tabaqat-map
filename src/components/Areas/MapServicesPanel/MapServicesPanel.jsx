@@ -1,6 +1,6 @@
 import CategoryOption from "./CategoryOption.jsx";
 import LayersListBtns from "./LayersListBtns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MapServicesPanel = () => {
   const [categoryData, setCategoryData] = useState(null);
@@ -8,6 +8,10 @@ const MapServicesPanel = () => {
   const changeCategoryDataHandel = (categoryData) => {
     setCategoryData(categoryData);
   };
+
+  useEffect(() => {
+    console.log(categoryData);
+  }, [categoryData]);
 
   return (
     <>
@@ -17,7 +21,10 @@ const MapServicesPanel = () => {
           changeCategoryDataHandel={changeCategoryDataHandel}
         />
       ) : (
-        <CategoryOption changeCategoryDataHandel={changeCategoryDataHandel} />
+        <CategoryOption
+          categoryData={categoryData}
+          changeCategoryDataHandel={changeCategoryDataHandel}
+        />
       )}
     </>
   );
