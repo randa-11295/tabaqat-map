@@ -8,13 +8,14 @@ import WmsLayer from "./WmsLayer";
 import MapHeaderInfo from "./MapHeaderInfo";
 import useGetMapFutures from "../../Hooks/useGetMapFutures";
 import { markerPintsState } from "../../utils/recoilState";
-
- export default function MainMap() {
-
+import useConfig from "../../utils/config";
+import axios from "axios";
+export default function MainMap() {
   const [, setDeoData] = useRecoilState(geoDataState);
   const { map: mapLibre } = useMap();
   const { getMapFutures } = useGetMapFutures();
   const [markerPints] = useRecoilState(markerPintsState);
+  const { getFuturesService } = useConfig();
 
   useEffect(() => {
     if (!mapLibre || !markerPints.lng || !markerPints.lat) return;
@@ -31,17 +32,23 @@ import { markerPintsState } from "../../utils/recoilState";
     // Event listener for click on the map
     mapLibre.on("click", (e) => {
       const { lngLat, point } = e;
-
+      
+      
       // Get the current bounding box (bbox) of the map
       getMapFutures({ lat: lngLat.lat, long: lngLat.lng });
       const bBox = mapLibre.getBounds();
+    const bBoxStr=  `${bBox._sw.lng}.${bBox._sw.lat}.${bBox._ne.lng}.${bBox._ne.lat}`
+      axios
+        .get(getFuturesService(bBoxStr))
+        .then((res) => console.log(res?.data?.features))
+        .catch((err) => console.log(err));
       setDeoData({
         ...lngLat,
         ...point,
         bBox,
       });
     });
-  }, [getMapFutures, mapLibre, setDeoData]);
+  }, [getFuturesService, getMapFutures, mapLibre, setDeoData]);
 
   return (
     <Box sx={boxStyle}>
@@ -54,7 +61,6 @@ import { markerPintsState } from "../../utils/recoilState";
     </Box>
   );
 }
-
 
 const boxStyle = {
   width: "100%",
