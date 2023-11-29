@@ -4,6 +4,7 @@ const useConfig = () => {
   
   return {
     centerArr: [45, 24],
+    access_token : access_token, 
     zoomLevel: 4,
     baseMapUrl: (baseMabId) => {
       if (!baseMabId) return null;
@@ -35,9 +36,8 @@ const useConfig = () => {
 
       console.log(bBox , Box)
       
-      return`https://data.tabaqat.net/geoserver/health/health_YPwlK276253/ows?exceptions=XML&version=1.3.0&feature_count=101&AcceptLanguages=en&access_token=tabaqat-vYiPnuZLgXLhbtq6XY3GLQ&service=WMS&request=GetFeatureInfo&layers=health_YPwlK276253&
-      bbox=${bBox}
-      &width=256&height=256&crs=EPSG%3A3857&query_layers=health_YPwlK276253&info_format=application%2Fjson&i=138&j=184`
+      return `https://data.tabaqat.net/geoserver/education-and-training/education-and-training_oznzW880947/ows?exceptions=XML&version=1.3.0&feature_count=101&AcceptLanguages=en&access_token=${access_token}&service=WMS&request=GetFeatureInfo&layers=education-and-training_oznzW880947&bbox=5009377.085697312%2C2504688.542848654%2C5635549.221409474%2C3130860.6785608195&width=256&height=256&crs=EPSG%3A3857&query_layers=education-and-training_oznzW880947&info_format=application%2Fjson&i=35&j=179
+      `
     },
 
     isString: (variable) => {
