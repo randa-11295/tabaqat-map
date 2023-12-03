@@ -39,58 +39,41 @@ export default function MainMap() {
       const bBox = mapLibre.getBounds();
       const bBoxStr = `${bBox._sw.lng}, ${bBox._sw.lat}, ${bBox._ne.lng}, ${bBox._ne.lat}`;
 
+      console.log(bBox);
       console.log(bBoxStr);
 
-      // Bounding box in decimal degrees [minlon, minlat, maxlon, maxlat]
-      const bboxDecimalDegrees = [
-        bBox._sw.lng,
-        bBox._sw.lat,
-        bBox._ne.lng,
-        bBox._ne.lat,
-      ];
-
-      // Conversion factor for latitude
-      const latConversionFactor = 20037508.34 / 180;
-
-      // Convert the bounding box to Mercator
-      const bboxMercator = [
-        bboxDecimalDegrees[0] * latConversionFactor,
-        Math.log(Math.tan(((bboxDecimalDegrees[1] + 90) * Math.PI) / 360)) *
-          latConversionFactor,
-        bboxDecimalDegrees[2] * latConversionFactor,
-        Math.log(Math.tan(((bboxDecimalDegrees[3] + 90) * Math.PI) / 360)) *
-          latConversionFactor,
-      ];
-
-      // Convert the array elements to strings and join with commas
-      const bboxMercatorString = bboxMercator.join(",");
-
-      console.log( bboxMercatorString);
-      console.log("4539747.983913187,2191602.4749925733,4696291.017841227,2348145.5089206137");
+      // https://data.tabaqat.net/geoserver/health/health_YPwlK276253/ows?
+      // exceptions=XML%20&
+      // version=2.0.0
+      // %20&AcceptLanguages=en%20
+      // &access_token=mapsaudi2coXRtfzYLLe6sg-ZEOwg%20
+      // &service=WFS%20
+      // &request=GetFeature%20&
+      // TYPENAMES=health_YPwlK276253%20&
+      // crs=EPSG%3A4326%20
+      // &outputFormat=application%2Fjson%20
+      // &CQL_FILTER=DWITHIN(wkb_geometry,%20POINT(24.231%2040.820),%200.001,%20meters)
 
       axios
         .get(
-          `https://data.tabaqat.net/geoserver/education-and-training/education-and-training_oznzW880947/ows`,
-          {
-            params: {
-              exceptions: "XML",
-              version: "1.3.0",
-              feature_count: "101",
-              AcceptLanguages: "en",
-              access_token: "tabaqat-UHJiK-NMGP-EkNN7G6aMEQ",
-              service: "WMS",
-              request: "GetFeatureInfo",
-              layers: "education-and-training_oznzW880947",
-              query_layers: "education-and-training_oznzW880947",
-              bbox: bboxMercatorString,
-              width: "256",
-              height: "256",
-              crs: "EPSG:3857",
-              info_format: "application/json",
-              i: 65,
-              j: 212,
-            },
-          }
+          `https://data.tabaqat.net/geoserver/health/health_YPwlK276253/ows?exceptions=XML%20&version=2.0.0%20&AcceptLanguages=en%20&access_token=tabaqat-9jAtRioHaQZWASaDsTXyxA&service=WFS%20&request=GetFeature%20&TYPENAMES=health_YPwlK276253%20&crs=EPSG%3A4326%20&outputFormat=application%2Fjson%20&CQL_FILTER=DWITHIN(wkb_geometry,%20POINT(24.231%2040.820),%200.001,%20meters)`
+          // {
+          //   params: {
+          //     exceptions: "XML",
+          //     version: "2.0.0",
+          //     // feature_count: "101",
+          //     AcceptLanguages: "en",
+          //     access_token: "tabaqat-UHJiK-NMGP-EkNN7G6aMEQ",
+          //     service: "WFS",
+          //     request: "GetFeature",
+          //     layers: "education-and-training_oznzW880947",
+          //     TYPENAMES: "health_YPwlK276253",
+          //     outputFormat: "application/json",
+          //     crs: "EPSG:4326",
+          //     CQL_FILTER:
+          //       "DWITHIN(wkb_geometry,%20POINT(24.231%2040.820),%200.001,%20meters",
+          //   },
+          // }
         )
         .then((res) => console.log(res?.data?.features, res?.data))
         .catch((err) => console.log(err));
