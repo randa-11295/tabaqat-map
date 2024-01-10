@@ -7,7 +7,7 @@ const WmsLayer = ()=>{
     const [wmsLayerGlobeData] = useRecoilState(wmsLayerState);
     const { wmsUrl } = useConfig();
     return ( wmsLayerGlobeData.name &&  <MlWmsLayer
-        visible={true}
+       
         url={wmsUrl(
           wmsLayerGlobeData?.workspace?.name,
           wmsLayerGlobeData.name

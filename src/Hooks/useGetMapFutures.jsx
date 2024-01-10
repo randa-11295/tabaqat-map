@@ -1,29 +1,26 @@
 import axios from "axios";
 import useConfig from "../utils/config";
 import { useTranslation } from "react-i18next";
-import { sideBarControllerState} from "../utils/recoilState";
+import { sideBarControllerState } from "../utils/recoilState";
 import { useRecoilState } from "recoil";
-
 import { markerPintsState } from "../utils/recoilState";
 import GeoDataList from "../components/Areas/GeoDataList";
-import {Box} from "@mui/material"
+import { Box } from "@mui/material";
 
 const useGetMapFutures = () => {
   const { accessToken } = useConfig();
   const { i18n } = useTranslation();
   const [, setSideBarController] = useRecoilState(sideBarControllerState);
-  const [ , setMarkerPints] = useRecoilState(markerPintsState);
+  const [, setMarkerPints] = useRecoilState(markerPintsState);
 
   const controlGeoDataSideBar = (valuesOpj, points) => {
-  
     setMarkerPints(points);
-    // <ListItemText primary={val + t("geoCoding.notAvailable")} />
     setSideBarController({
-      children: (
+      children:  (
         <Box p={3}>
-        <GeoDataList data={valuesOpj} />
-        </Box >
-      ),
+          <GeoDataList data={valuesOpj} />
+        </Box>
+      ), 
       open: true,
     });
   };
@@ -39,15 +36,16 @@ const useGetMapFutures = () => {
         },
       })
       .then((res) => {
-        // console.log(res.data.bbox , )
-        // console.log(res.data , )
-        res.data.features[0].properties &&
-          controlGeoDataSideBar(res.data.features[0], {
-            lat: values.lat,
-            lng: values.long,
-          });
+        res.data.features[0]?.properties
+          ? controlGeoDataSideBar(res.data.features[0], {
+              lat: values.lat,
+              lng: values.long,
+            })
+          : controlGeoDataSideBar(false, {
+              lat: values.lat,
+              lng: values.long,
+            });
       })
-
       .catch((err) => {
         console.log(err);
       });
