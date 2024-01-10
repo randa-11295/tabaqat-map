@@ -24,11 +24,12 @@ export default CategoriesCard;
 const cardStyle = {
   p: 1.5,
   border: 2,
-  color: "secondary.main",
-  borderColor: "#1ba7a6",
+
+  color : "gray" , 
+  borderColor: "gray",
   transition: ".3s",
   cursor: "pointer",
-  "& img": { filter: " sepia(84%)  hue-rotate(116deg)" },
+  "& img": { filter: " grayscale(100%) brightness(115%)" },
   " &:hover ": {
     transform: "scale(1.1) skew(-1deg)",
     color: "primary.main",
