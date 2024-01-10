@@ -24,7 +24,6 @@ export default CategoriesCard;
 const cardStyle = {
   p: 1.5,
   border: 2,
-
   color : "gray" , 
   borderColor: "gray",
   transition: ".3s",
